@@ -9,10 +9,10 @@ from django.contrib.auth import get_user_model
 from core import models
 
 
-
 def create_user(email='test@example.com', password='testpass123'):
     """Create and return a new user."""
     return get_user_model().objects.create_user(email, password)
+
 
 class ModelTest(TestCase):
     """Test for models"""
@@ -41,8 +41,8 @@ class ModelTest(TestCase):
             user = get_user_model().objects.create_user(email, 'sample123')
             self.assertEqual(user.email, expected)
 
-    def test_new_user_without_email_raises_error(self):
-        """Test that creating a new user without an email raises a ValueError."""
+    def test_new_user_without_email_error(self):
+        """Test creating a new user without an email raises a ValueError."""
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user('', 'test123')
 
@@ -70,7 +70,6 @@ class ModelTest(TestCase):
         )
 
         self.assertEqual(str(recipe), recipe.title)
-
 
     def test_create_tag(self):
         """Test creating a tag is successful"""
